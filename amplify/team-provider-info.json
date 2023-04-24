@@ -1,0 +1,15 @@
+{
+  "production": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-paripicomap-production-131950-authRole",
+      "UnauthRoleArn": "arn:aws:iam::588497192517:role/amplify-paripicomap-production-131950-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::588497192517:role/amplify-paripicomap-production-131950-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-paripicomap-production-131950-deployment",
+      "UnauthRoleName": "amplify-paripicomap-production-131950-unauthRole",
+      "StackName": "amplify-paripicomap-production-131950",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:588497192517:stack/amplify-paripicomap-production-131950/b1b4aa20-e2a2-11ed-811e-02a39fb72df2",
+      "AmplifyAppId": "d2jk4u04fjxxet"
+    }
+  }
+}

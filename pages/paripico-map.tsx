@@ -1,13 +1,13 @@
 /* eslint-disable react/jsx-key */
 
-import { useEffect, useState } from 'react'
-import map from '../helpers/map'
+import { useEffect, useState } from "react";
+import map from "../helpers/map";
 // @ts-ignore
-import PF from 'pathfinding'
-import { Box, Text } from '@mantine/core'
+import PF from "pathfinding";
+import { Box, Text } from "@mantine/core";
 const ParipicoMap = () => {
-  const [pathFindingState, setPathFindingState] = useState([])
-  const [selectedGoal, setSelectedGoal] = useState([0, 0])
+  const [pathFindingState, setPathFindingState] = useState([]);
+  const [selectedGoal, setSelectedGoal] = useState([0, 0]);
   // useEffect(() => {
   //   const grid = new PF.Grid(map)
   //   const finder = new PF.AStarFinder()
@@ -18,19 +18,20 @@ const ParipicoMap = () => {
   // }, [selectedGoal])
   return map.map((x, xIndex) => {
     return (
-      <div style={{ width: 10000, display: 'flex', backgroundColor: 'white' }}>
+      <div style={{ width: 10000, display: "flex", backgroundColor: "white" }}>
         {x.map((y, yIndex) => {
-          if (y === '' || y === 0) {
+          if (y === "" || y === 0) {
             return (
-
-              <Box sx={theme => {
-                return {
-                  width: 50,
-                  height: 50,
-                  backgroundColor: theme.colors.grape
-                }
-              }}></Box>
-            )
+              <Box
+                sx={(theme) => {
+                  return {
+                    width: 50,
+                    height: 50,
+                    backgroundColor: theme.colors.grape,
+                  };
+                }}
+              ></Box>
+            );
           }
           if (y !== 0) {
             return (
@@ -38,41 +39,39 @@ const ParipicoMap = () => {
                 onClick={() => {
                   // bottom
                   if (map[xIndex + 1][yIndex] === 0) {
-                    setSelectedGoal([yIndex, xIndex + 1])
-                    return
+                    setSelectedGoal([yIndex, xIndex + 1]);
+                    return;
                   }
                   // up
                   if (map[xIndex - 1][yIndex] === 0) {
-                    setSelectedGoal([yIndex, xIndex - 1])
-                    return
+                    setSelectedGoal([yIndex, xIndex - 1]);
+                    return;
                   }
                   // right
                   if (map[xIndex][yIndex + 1] === 0) {
-                    setSelectedGoal([yIndex + 1, xIndex])
-                    return
+                    setSelectedGoal([yIndex + 1, xIndex]);
+                    return;
                   }
                   // left
                   if (map[xIndex][yIndex - 1] === 0) {
-                    setSelectedGoal([yIndex - 1, xIndex])
-                    return
+                    setSelectedGoal([yIndex - 1, xIndex]);
+                    return;
                   }
                 }}
                 // style={{ width: 50, height: 50, backgroundColor: 'pink', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                sx={theme => {
+                sx={(theme) => {
                   return {
                     width: 50,
                     height: 50,
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center'
-                  }
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  };
                 }}
               >
-                <Text>
-                  {y}
-                </Text>
+                <Text>{y}</Text>
               </Box>
-            )
+            );
           }
           if (
             pathFindingState.findIndex(
@@ -85,13 +84,13 @@ const ParipicoMap = () => {
                   width: 50,
                   height: 50,
                   // border: '1px solid black',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: 'green',
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "green",
                 }}
               ></div>
-            )
+            );
           }
           // if (xIndex === 29 && yIndex === 6) {
           //   return <h1>entry</h1>
@@ -99,18 +98,18 @@ const ParipicoMap = () => {
           return (
             <div
               onClick={() => {
-                console.log(yIndex, xIndex)
+                console.log(yIndex, xIndex);
               }}
               style={{
                 width: 50,
                 height: 50,
               }}
             ></div>
-          )
+          );
         })}
       </div>
-    )
-  })
-}
+    );
+  });
+};
 
-export default ParipicoMap
+export default ParipicoMap;

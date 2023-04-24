@@ -1,0 +1,12 @@
+type ParipicoCircleSectionChild {
+  circle_id: String!
+  circle_name: String!
+}
+
+type ParipicoCircle @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  section: String!
+  child: [ParipicoCircleSectionChild!]!
+  weight: Int
+}
+ 
