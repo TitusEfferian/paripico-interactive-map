@@ -1,68 +1,89 @@
 /* eslint-disable react/jsx-key */
 
 import { useEffect, useState } from "react";
-import map from "../helpers/map";
+import map, { algorithmMap } from "../helpers/map";
 // @ts-ignore
 import PF from "pathfinding";
 import { Box, Text } from "@mantine/core";
+import Head from "next/head";
+const WIDTH = 50;
+const HEIGHT = 50;
 const ParipicoMap = () => {
   const [pathFindingState, setPathFindingState] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState([0, 0]);
-  // useEffect(() => {
-  //   const grid = new PF.Grid(map)
-  //   const finder = new PF.AStarFinder()
-  //   const path = finder.findPath(6, 29, selectedGoal[0], selectedGoal[1], grid)
-  //   setPathFindingState(
-  //     selectedGoal[0] === 0 && selectedGoal[1] === 0 ? [] : path
-  //   )
-  // }, [selectedGoal])
+  useEffect(() => {
+    const grid = new PF.Grid(algorithmMap);
+    const finder = new PF.DijkstraFinder();
+    const path = finder.findPath(1, 10, selectedGoal[0], selectedGoal[1], grid);
+    setPathFindingState(
+      selectedGoal[0] === 0 && selectedGoal[1] === 0 ? [] : path
+    );
+  }, [selectedGoal]);
   return map.map((x, xIndex) => {
     return (
-      <div style={{ width: 10000, display: "flex", backgroundColor: "white" }}>
+      <div style={{ width: 2550, display: "flex", backgroundColor: "white" }}>
+        <Head>
+          <meta name="viewport" content="minimum-scale=0.5, initial-scale=0.5, width=device-width" />
+      </Head>
         {x.map((y, yIndex) => {
-          if (y === "" || y === 0) {
+          if (
+            pathFindingState.findIndex(
+              (x) => x[0] === yIndex && x[1] === xIndex
+            ) > -1
+          ) {
+            return (
+              <Box sx={theme=>{
+                return{
+                  width: WIDTH,
+                  height: HEIGHT,
+                  backgroundColor:theme.colors.green
+                }
+              }}></Box>
+            );
+          }
+          if (y === "" || y==='BLOCK') {
             return (
               <Box
                 sx={(theme) => {
                   return {
-                    width: 50,
-                    height: 50,
+                    width: WIDTH,
+                    height: HEIGHT,
                     backgroundColor: theme.colors.grape,
                   };
                 }}
               ></Box>
             );
           }
-          if (y !== 0) {
+          if (y !== "") {
             return (
               <Box
                 onClick={() => {
-                  // bottom
-                  if (map[xIndex + 1][yIndex] === 0) {
-                    setSelectedGoal([yIndex, xIndex + 1]);
-                    return;
-                  }
-                  // up
-                  if (map[xIndex - 1][yIndex] === 0) {
-                    setSelectedGoal([yIndex, xIndex - 1]);
-                    return;
-                  }
-                  // right
-                  if (map[xIndex][yIndex + 1] === 0) {
-                    setSelectedGoal([yIndex + 1, xIndex]);
-                    return;
-                  }
                   // left
-                  if (map[xIndex][yIndex - 1] === 0) {
+                  if (map[xIndex][yIndex - 1] === "") {
                     setSelectedGoal([yIndex - 1, xIndex]);
                     return;
                   }
+                  // up
+                  if (map[xIndex - 1][yIndex] === "") {
+                    setSelectedGoal([yIndex, xIndex - 1]);
+                    return;
+                  }
+
+                  // right
+                  if (map[xIndex][yIndex + 1] === "") {
+                    setSelectedGoal([yIndex + 1, xIndex]);
+                    return;
+                  }
+                  // bottom
+                  if (map[xIndex + 1][yIndex] === "") {
+                    setSelectedGoal([yIndex, xIndex + 1]);
+                    return;
+                  }
                 }}
-                // style={{ width: 50, height: 50, backgroundColor: 'pink', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                 sx={(theme) => {
                   return {
-                    width: 50,
-                    height: 50,
+                    width: WIDTH,
+                    height: HEIGHT,
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -73,36 +94,14 @@ const ParipicoMap = () => {
               </Box>
             );
           }
-          if (
-            pathFindingState.findIndex(
-              (x) => x[0] === yIndex && x[1] === xIndex
-            ) > -1
-          ) {
-            return (
-              <div
-                style={{
-                  width: 50,
-                  height: 50,
-                  // border: '1px solid black',
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "green",
-                }}
-              ></div>
-            );
-          }
-          // if (xIndex === 29 && yIndex === 6) {
-          //   return <h1>entry</h1>
-          // }
           return (
             <div
               onClick={() => {
                 console.log(yIndex, xIndex);
               }}
               style={{
-                width: 50,
-                height: 50,
+                width: WIDTH,
+                height: HEIGHT,
               }}
             ></div>
           );

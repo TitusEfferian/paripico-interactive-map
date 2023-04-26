@@ -1,5 +1,6 @@
 import CircleList from "@/component/Home/CircleList";
 import {
+  Alert,
   Button,
   Center,
   List,
@@ -16,10 +17,11 @@ const Home = () => {
   const { data } = useSWR<ParipicoCircle[]>("paripico_circle_data");
   const { push } = useRouter();
   return (
-    <Center mt={"lg"}>
+    <Center p="lg">
       <Stack spacing={"xl"}>
         <Stack>
           <Title>Paripico Event Map</Title>
+          <Alert>Paripico Interactive Event Map</Alert>
           <Title order={2}>Circle Booth</Title>
         </Stack>
         <SimpleGrid
