@@ -11,14 +11,14 @@ const HEIGHT = 50;
 const ParipicoMap = () => {
   const [pathFindingState, setPathFindingState] = useState([]);
   const [selectedGoal, setSelectedGoal] = useState([0, 0]);
-  useEffect(() => {
-    const grid = new PF.Grid(algorithmMap);
-    const finder = new PF.DijkstraFinder();
-    const path = finder.findPath(1, 10, selectedGoal[0], selectedGoal[1], grid);
-    setPathFindingState(
-      selectedGoal[0] === 0 && selectedGoal[1] === 0 ? [] : path
-    );
-  }, [selectedGoal]);
+  // useEffect(() => {
+  //   const grid = new PF.Grid(algorithmMap);
+  //   const finder = new PF.DijkstraFinder();
+  //   const path = finder.findPath(1, 10, selectedGoal[0], selectedGoal[1], grid);
+  //   setPathFindingState(
+  //     selectedGoal[0] === 0 && selectedGoal[1] === 0 ? [] : path
+  //   );
+  // }, [selectedGoal]);
   return map.map((x, xIndex) => {
     return (
       <div style={{ width: 2550, display: "flex", backgroundColor: "white" }}>
